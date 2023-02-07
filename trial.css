@@ -1,0 +1,76 @@
+body{
+    background: aquamarine;
+    color: olivedrab;
+}
+
+.heading{
+    position: absolute;
+    font-style: italic;
+    font-size: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.btn {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    font-size: 30px;
+    transform: translate(-30%, -50%);
+    border-style: dotted;
+    border-color: black;
+    padding: 10px;
+    background-color: yellowgreen;
+    color: black;
+}
+
+#map{
+    height: 90vh;
+    width: 50%;
+    position: relative;
+
+    margin: 0 auto;
+    margin-top: 40px;
+    border-style:dotted;
+    border-color: grey;
+    border-radius: 10px;
+    box-shadow: 3px 50px 100px black;
+}
+
+.mapClass{
+    height: 50px;
+    width: 100px;
+    border-left: 5px solid green;
+}
+
+/* --------------------------------------------------------------------------- */
+
+.country--card{
+    height: 400px;
+    width: 300px;
+    border-style: solid;
+    border-width: 3px;
+    background: whitesmoke;
+    color: black;
+    margin: 0 auto;
+    transform: translate(0%, 50%);
+    box-shadow: 10px 10px 100px black;
+}
+
+.country--card--flag{
+    height: 200px;
+    /* background: url("https://flagcdn.com/in.svg"); */
+    /* background-size :contain; */
+}   
+
+.country--card--details{
+    color: black;
+    margin-left: 40px;
+    font-size: 15px;
+}
+
+.country{
+    display: flex;
+    flex-direction: row;
+}
