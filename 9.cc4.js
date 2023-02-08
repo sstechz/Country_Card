@@ -434,77 +434,227 @@ GOOD LUCK 😀
 //   );
 
 
-// ---------------------------------------------------------------------------------------------
-// Asynchronous Js & API calls
+// // ---------------------------------------------------------------------------------------------
+// // Asynchronous Js & API calls
 
-const countryContainer = document.querySelector('.country');
+// const countryContainer = document.querySelector('.country');
 
-let country = prompt("Enter The Country Name");
-console.log(country);
+// let country = prompt("Enter The Country Name");
+// console.log(country);
 
-//const country = "india";
+// //const country = "india";
 
-const request = new XMLHttpRequest();
-request.open('GET',`https://restcountries.com/v3.1/name/${country}`);
-request.send();
-console.log(request.responseText);
+// const request = new XMLHttpRequest();
+// request.open('GET',`https://restcountries.com/v3.1/name/${country}`);
+// request.send();
+// console.log(request.responseText);
 
-function renderCountry(data){
-    const lang = data.languages;
+// function renderCountry(data){
+//     const lang = data.languages;
 
-    const html = `
-        <div class="country--card">
-            <div class="country--card--flag" style="background: url('${data.flags.svg}'); background-size: contain; background-repeat: no-repeat"></div>
-            <div class="country--card--details">
-                <div class="country--name"><h2>${data.name.common}</h2></div>
-                <h3 style="margin-top: -20px;">${data.region}</h3>
-                <p class="country--population"><span>🧑‍🤝‍🧑</span>${data.population}</p>
-                <p class="country--language"><span>🗣️</span>${Object.values(lang)[0]}</p>
-                <p class="country--currency"><span>💲</span>${Object.keys(data.currencies)[0]}</p>
-            </div>
-        </div>`;
+//     const html = `
+//         <div class="country--card">
+//             <div class="country--card--flag" style="background: url('${data.flags.svg}'); background-size: contain; background-repeat: no-repeat"></div>
+//             <div class="country--card--details">
+//                 <div class="country--name"><h2>${data.name.common}</h2></div>
+//                 <h3 style="margin-top: -20px;">${data.region}</h3>
+//                 <p class="country--population"><span>🧑‍🤝‍🧑</span>${data.population}</p>
+//                 <p class="country--language"><span>🗣️</span>${Object.values(lang)[0]}</p>
+//                 <p class="country--currency"><span>💲</span>${Object.keys(data.currencies)[0]}</p>
+//             </div>
+//         </div>`;
 
-    countryContainer.insertAdjacentHTML('beforeend', html);
-}
+//     countryContainer.insertAdjacentHTML('beforeend', html);
+// }
 
-request.addEventListener('load', function(){
-    //console.log(this.responseText);
+// request.addEventListener('load', function(){
+//     //console.log(this.responseText);
 
-    const [data] = JSON.parse(this.responseText);
-    console.log(data);
+//     const [data] = JSON.parse(this.responseText);
+//     console.log(data);
 
-    renderCountry(data);
+//     renderCountry(data);
 
-    //  Adding its neighbouring country
-    //  Called as "Callback Hell"
-    const neighbour = data.borders ?. [0];
-    console.log(neighbour);
+//     //  Adding its neighbouring country
+//     //  Called as "Callback Hell"
+//     const neighbour = data.borders ?. [0];
+//     console.log(neighbour);
 
-    const request2 = new XMLHttpRequest();
-    request2.open('GET', `https://restcountries.com/v3.1/alpha/${neighbour}`);
-    request2.send();
+//     const request2 = new XMLHttpRequest();
+//     request2.open('GET', `https://restcountries.com/v3.1/alpha/${neighbour}`);
+//     request2.send();
 
-    request2.addEventListener('load', function(){
-        const [data2] = JSON.parse(this.responseText);
-        console.log(data2);
+//     request2.addEventListener('load', function(){
+//         const [data2] = JSON.parse(this.responseText);
+//         console.log(data2);
 
-        renderCountry(data2);
+//         renderCountry(data2);
 
-        //Adding its neighbouring country "No - 3"
-        const neighbour2 = data2.borders ?. [0];
-        console.log(neighbour2);
+//         //Adding its neighbouring country "No - 3"
+//         const neighbour2 = data2.borders ?. [0];
+//         console.log(neighbour2);
 
-        const request3 = new XMLHttpRequest();
-        request3.open('GET', `https://restcountries.com/v3.1/alpha/${neighbour2}`);
-        request3.send();
+//         const request3 = new XMLHttpRequest();
+//         request3.open('GET', `https://restcountries.com/v3.1/alpha/${neighbour2}`);
+//         request3.send();
 
-        request3.addEventListener('load', function(){
-            const [data3] = JSON.parse(this.responseText);
-            console.log(data3);
+//         request3.addEventListener('load', function(){
+//             const [data3] = JSON.parse(this.responseText);
+//             console.log(data3);
 
-            renderCountry(data3);
-        });
-    });
-});
+//             renderCountry(data3);
+//         });
+//     });
+// });
+
+// // -----------------------------------------------------------------------------------------------
+// //  API fetch using "fetch" method
+
+// const countryContainer = document.querySelector('.country');
+
+// const country = prompt("Enter the country");
+
+// function renderCountry(data){
+//     const lang = data.languages;
+
+//     const html = `
+//         <div class="country--card">
+//             <div class="country--card--flag" style="background: url('${data.flags.svg}'); background-size: contain; background-repeat: no-repeat"></div>
+//             <div class="country--card--details">
+//                 <div class="country--name"><h2>${data.name.common}</h2></div>
+//                 <h3 style="margin-top: -20px;">${data.region}</h3>
+//                 <p class="country--population"><span>🧑‍🤝‍🧑</span>${data.population}</p>
+//                 <p class="country--language"><span>🗣️</span>${Object.values(lang)[0]}</p>
+//                 <p class="country--currency"><span>💲</span>${Object.keys(data.currencies)[0]}</p>
+//             </div>
+//         </div>`;
+
+//     countryContainer.insertAdjacentHTML('beforeend', html);
+// }
+
+// function renderError(msg){
+//     countryContainer.insertAdjacentText('beforeend', msg);
+// }
+
+// const request = fetch(`https://restcountries.com/v3.1/name/${country}`)
+// .then(response => {
+//     if(!response.ok){
+//         throw new Error(`(${response.status}) Error! Country not found.`);
+//     }
+//     return response.json()
+// })
+// .then(function(data) {
+//     const [info] = data;
+//     renderCountry(info);
+// })
+// .catch(err => {
+//     console.error(`${err}💣💣💣`);
+//     renderError(`Something went wrong. ${err.message}. 📛📛📛Try again !`);    
+// })
+// .finally(console.log("This is the 'finally' block. Activates after all the fetch/ catch executions."));
+
+
+
+// // --------------------------------------------------------------------------------------------
+// //  #Challenge1
+// //  Based On Reverse Geocoding
+
+// /* 
+// In this challenge you will build a function 'whereAmI' which renders a country ONLY 
+// based on GPS coordinates. For that, you will use a second API to geocode coordinates.
+// Here are your tasks:
+
+// PART 1
+// 1. Create a function 'whereAmI' which takes as inputs a latitude value (lat) and a 
+//     longitude value (lng) (these are GPS coordinates, examples are below).
+// 2. Do 'reverse geocoding' of the provided coordinates. Reverse geocoding means to 
+//     convert coordinates to a meaningful location, like a city and country name. Use this API to 
+//     do reverse geocoding: https://geocode.xyz/api.
+
+// The AJAX call will be done to a URL with this format: https://geocode.xyz/52.508,13.381?geoit=json. 
+// Use the fetch API and promises to get the data. Do NOT use the getJSON function we created, 
+// that is cheating 😉
+
+// 3. Once you have the data, take a look at it in the console to see all the attributes that 
+//     you recieved about the provided location. Then, using this data, log a messsage like this 
+//     to the console: 'You are in Berlin, Germany'
+// 4. Chain a .catch method to the end of the promise chain and log errors to the console
+// 5. This API allows you to make only 3 requests per second. If you reload fast, you will get 
+//     this error with code 403. This is an error with the request. Remember, fetch() does NOT 
+//     reject the promise in this case. So create an error to reject the promise yourself, with a 
+//     meaningful error message.
+
+// PART 2
+// 6. Now it's time to use the received data to render a country. So take the relevant attribute 
+//     from the geocoding API result, and plug it into the countries API that we have been using.
+// 7. Render the country and catch any errors, just like we have done in the last lecture (you can 
+//     even copy this code, no need to type the same code)
+
+// TEST COORDINATES 1: 52.508, 13.381 (Latitude, Longitude)
+// TEST COORDINATES 2: 19.037, 72.873
+// TEST COORDINATES 2: -33.933, 18.474
+// GOOD LUCK 😀
+// */
+
+// const countryContainer = document.querySelector('.country');
+
+// // const lat = prompt("Enter value of Latitude");
+// // const long = prompt("Enter value of Longitude");
+
+// function renderCountry(data){
+//     const lang = data.languages;
+
+//     const html = `
+//         <div class="country--card">
+//             <div class="country--card--flag" style="background: url('${data.flags.svg}'); background-size: contain; background-repeat: no-repeat"></div>
+//             <div class="country--card--details">
+//                 <div class="country--name"><h2>${data.name.common}</h2></div>
+//                 <h3 style="margin-top: -20px;">${data.region}</h3>
+//                 <p class="country--population"><span>🧑‍🤝‍🧑</span>${data.population}</p>
+//                 <p class="country--language"><span>🗣️</span>${Object.values(lang)[0]}</p>
+//                 <p class="country--currency"><span>💲</span>${Object.keys(data.currencies)[0]}</p>
+//             </div>
+//         </div>`;
+
+//     countryContainer.insertAdjacentHTML('beforeend', html);
+// };
+
+// function callCountryDetailApi(country) {
+//     const request = fetch(`https://restcountries.com/v3.1/name/${country}`)
+//     .then(response => {
+//         const str = response.json();
+//         //console.log(str);
+//         return str;
+//     })
+//     .then(
+//         function(data) {
+//             const [info] = data;
+//             //console.log(info);
+//             renderCountry(info);
+//         }
+//     );
+// };
+
+// function whereAmI(lat, long){
+//     fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${long}`)
+//     .then(response => {
+//         const res = response.json();
+//         console.log(res);
+//         return res;
+//     })
+//     .then(function(data) {
+//         const info = data;
+//         //console.log(info.address.country);
+//         callCountryDetailApi(info.address.country)
+//     });
+// }
+
+// whereAmI(19.037, 72.873);
+// whereAmI(52.508, 13.381);
+// whereAmI(-33.933, 18.474);
+
+
+
+
 
 
